@@ -3,22 +3,16 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/gururajguru/CI_CD_Pipeline.git'
+                checkout scm: [
+                    $class: 'GitSCM', 
+                    branches: [[name: '*/main']], 
+                    userRemoteConfigs: [[url: 'https://github.com/gururajguru/CI_CD_Pipeline.git']]
+                ]
             }
         }
         stage('Build') {
             steps {
                 echo 'Building...'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing...'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying...'
             }
         }
     }
